@@ -111,7 +111,7 @@ var _ = Describe("Preskton's Mappers", func() {
 		Context("When it walks a struct to get the mapped fields for `terraform`", func() {
 
 			expected = weapons["tkSplatRoller"]
-			actualMap, mappingErr := mapper.MapStructByTag(expected, "terraform")
+			actualMap, mappingErr := mapper.ShallowMapStructByTag(expected, "terraform")
 
 			It("should not error", func() {
 				Expect(mappingErr).ShouldNot(HaveOccurred())
@@ -142,6 +142,48 @@ var _ = Describe("Preskton's Mappers", func() {
 				Expect(powerUpCosts).To(Equal(expected.PowerUpCosts))
 			})
 
+			It("should handle nested structs", func() {
+				stats, ok := actualMap["stats"]
+				Expect(ok).To(Equal(true))
+				Expect(stats).ShouldNot(BeNil())
+
+				statsCasted, castOk := stats.(WeaponStats)
+				Expect(castOk).To(Equal(true))
+				Expect(statsCasted).ShouldNot(BeNil())
+			})
+		})
+
+		Context("When it does a deep copy", func() {
+			deepMap, deepErr := mapper.DeepMapStructByTag(expected, "terraform")
+			stats, ok := deepMap["stats"]
+
+			It("should not error", func() {
+				Expect(deepErr).ShouldNot(HaveOccurred())
+			})
+
+			It("should convert nested structs to nested maps", func() {
+				Expect(ok).To(Equal(true))
+				Expect(stats).ShouldNot(BeNil())
+
+				statsCasted, castOk := stats.(map[string]interface{})
+				Expect(castOk).To(Equal(true))
+				Expect(statsCasted).ShouldNot(BeNil())
+			})
+
+			It("should have the exact keys we expect", func() {
+				actualStats, castOk := stats.(map[string]interface{})
+
+				Expect(castOk).ShouldNot(BeNil())
+
+				actualKeys := make([]string, 0)
+				expectedKeys := []string{"power_value", "range_value", "rof", "adj", "is_op"}
+
+				for key, _ := range actualStats {
+					actualKeys = append(actualKeys, key)
+				}
+
+				Expect(actualKeys).To(Equal(expectedKeys))
+			})
 		})
 	})
 

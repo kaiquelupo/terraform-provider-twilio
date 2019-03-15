@@ -29,7 +29,7 @@ func MarshalToTerraform(src interface{}, dest *schema.ResourceData, sm map[strin
 		return fmt.Errorf("sm cannot be null")
 	}
 
-	mv, err := MapStructByTag(src, "terraform")
+	mv, err := ShallowMapStructByTag(src, "terraform")
 
 	if err != nil {
 		return fmt.Errorf("Failed to map values: %s", err)
@@ -47,7 +47,7 @@ func MarshalToTerraform(src interface{}, dest *schema.ResourceData, sm map[strin
 					return fmt.Errorf("Terraform field `%s` is a Set, but target value is not a struct", terraformFieldName)
 				}
 
-				mappedValue, err := MapStructByTag(sourceValue, "terraform")
+				mappedValue, err := ShallowMapStructByTag(sourceValue, "terraform")
 				nestedSet.Add(mappedValue)
 
 				if err != nil {
@@ -64,5 +64,22 @@ func MarshalToTerraform(src interface{}, dest *schema.ResourceData, sm map[strin
 			}
 		}
 	}
+
+	return nil
+}
+
+func MarshalTerraformToStruct(dest interface{}, src *schema.ResourceData, tfschema map[string]*schema.Schema) error {
+	if !structs.IsStruct(dest) {
+		return fmt.Errorf("Destination must be a struct")
+	}
+
+	if src == nil {
+		return fmt.Errorf("Source terraform ResourceData must not be nil")
+	}
+
+	if tfschema == nil {
+		return fmt.Errorf("Source terraform Schema must not be nil")
+	}
+
 	return nil
 }
