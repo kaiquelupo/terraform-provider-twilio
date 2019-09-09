@@ -26,6 +26,10 @@ Current features:
   - Create
   - Update
   - Delete
+- `twilio_phoneNumber`
+  - Create
+  - Update
+  - Delete
 
 More coming soon.
 
@@ -83,5 +87,11 @@ resource "twilio_workflow" "test_workflow" {
     friendly_name = "Test Workflow"
     workspace_sid = "WSXXXXXXXXXXXXXX"
     configuration = "{\"task_routing\":{\"default_filter\":{\"queue\":\"${twilio_taskQueue.normal_support.id}\"}}}"
+}
+
+resource "twilio_phoneNumber" "test_phone_number" {
+    friendly_name = "Test Phone Number"
+    search = "310*"
+    country_code = "US"
 }
 ```
