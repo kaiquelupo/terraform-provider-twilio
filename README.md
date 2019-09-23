@@ -18,6 +18,14 @@ Current features:
   - Create
   - Update
   - Delete
+- `twilio_taskQueue`
+  - Create
+  - Update
+  - Delete
+- `twilio_workflow`
+  - Create
+  - Update
+  - Delete
 
 More coming soon.
 
@@ -64,5 +72,16 @@ resource "twilio_application" "new_twiml_app" {
 resource "twilio_worker" "test_worker" {
     friendly_name = "Your Name"
     workspace_sid = "WSXXXXXXXXXXXXXX"
+}
+
+resource "twilio_taskQueue" "normal_support" {
+    friendly_name = "Normal Support"
+    workspace_sid = "WSXXXXXXXXXXXXXX"
+}
+
+resource "twilio_workflow" "test_workflow" {
+    friendly_name = "Test Workflow"
+    workspace_sid = "WSXXXXXXXXXXXXXX"
+    configuration = "{\"task_routing\":{\"default_filter\":{\"queue\":\"${twilio_taskQueue.normal_support.id}\"}}}"
 }
 ```
