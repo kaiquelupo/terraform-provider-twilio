@@ -27,6 +27,18 @@ func resourceTwilioWorkspace() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"event_callback_url": &schema.Schema{
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"events_filter": &schema.Schema{
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"multi_task_enabled": &schema.Schema{
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 		},
 	}
 }
