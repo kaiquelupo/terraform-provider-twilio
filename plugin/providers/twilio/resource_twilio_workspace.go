@@ -36,6 +36,7 @@ func flattenWorkspaceForCreate(d *schema.ResourceData) url.Values {
 
 	v.Add("FriendlyName", d.Get("friendly_name").(string))
 	v.Add("EventCallbackUrl", d.Get("event_callback_url").(string))
+	v.Add("EventsFilter", d.Get("events_filter").(string))
 	// TODO: pass through multi task enabled
 	// https://www.twilio.com/docs/taskrouter/api/workspace#create-a-workspace-resource
 	return v
@@ -73,6 +74,7 @@ func resourceTwilioWorkspaceCreate(d *schema.ResourceData, meta interface{}) err
 	d.Set("multi_task_enabled", workspace.MultiTaskEnabled)
 	d.Set("sid", workspace.Sid)
 	d.Set("event_callback_url", workspace.EventCallbackUrl)
+	d.Set("events_filter", workspace.EventsFilter)
 	return nil
 }
 
@@ -107,6 +109,7 @@ func resourceTwilioWorkspaceRead(d *schema.ResourceData, meta interface{}) error
 	d.Set("multi_task_enabled", workspace.MultiTaskEnabled)
 	d.Set("sid", workspace.Sid)
 	d.Set("event_callback_url", workspace.EventCallbackUrl)
+	d.Set("events_filter", workspace.EventsFilter)
 	return nil
 }
 
@@ -144,6 +147,7 @@ func resourceTwilioWorkspaceUpdate(d *schema.ResourceData, meta interface{}) err
 	d.Set("multi_task_enabled", workspace.MultiTaskEnabled)
 	d.Set("sid", workspace.Sid)
 	d.Set("event_callback_url", workspace.EventCallbackUrl)
+	d.Set("events_filter", workspace.EventsFilter)
 	return nil
 }
 
