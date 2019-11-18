@@ -37,7 +37,7 @@ func flattenWorkspaceForCreate(d *schema.ResourceData) url.Values {
 	v.Add("FriendlyName", d.Get("friendly_name").(string))
 	v.Add("EventCallbackUrl", d.Get("event_callback_url").(string))
 	v.Add("EventsFilter", d.Get("events_filter").(string))
-	// TODO: pass through multi task enabled
+	v.Add("MultiTaskEnabled", d.Get("multi_task_enabled").(string))
 	// https://www.twilio.com/docs/taskrouter/api/workspace#create-a-workspace-resource
 	return v
 }
