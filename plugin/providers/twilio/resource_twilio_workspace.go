@@ -50,10 +50,9 @@ func flattenWorkspaceForCreate(d *schema.ResourceData) url.Values {
 	v.Add("EventCallbackUrl", d.Get("event_callback_url").(string))
 	v.Add("EventsFilter", d.Get("events_filter").(string))
 
-	val, ok := d.Get("multi_task_enabled"); ok {
-		//do something here
+	if val := d.Get("multi_task_enabled"); val != "" {
+		v.Add("MultiTaskEnabled", val.(string))
 	}
-	v.Add("MultiTaskEnabled", d.Get("multi_task_enabled").(string))
 	// https://www.twilio.com/docs/taskrouter/api/workspace#create-a-workspace-resource
 	return v
 }
