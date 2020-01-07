@@ -6,6 +6,10 @@ The goal of this Terraform provider plugin is to make manging your Twilio accoun
 
 Current features:
 
+- `twilio_workspace`
+  - Create
+  - Update
+  - Delete
 - `twilio_subaccount`
   - Create
   - Update
