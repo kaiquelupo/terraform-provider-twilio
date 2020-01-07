@@ -31,6 +31,10 @@ func resourceTwilioWorker() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"attributes": &schema.Schema{
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 		},
 	}
 }
@@ -39,6 +43,8 @@ func flattenWorkerForCreate(d *schema.ResourceData) url.Values {
 	v := make(url.Values)
 
 	v.Add("FriendlyName", d.Get("friendly_name").(string))
+	v.Add("Attributes", d.Get("attributes").(string))
+
 	return v
 }
 
@@ -102,6 +108,7 @@ func resourceTwilioWorkerRead(d *schema.ResourceData, meta interface{}) error {
 		return err
 	}
 	d.Set("friendly_name", worker.FriendlyName)
+	d.Set("attributes", worker.Attributes)
 	d.Set("date_created", worker.DateCreated)
 	d.Set("date_updated", worker.DateUpdated)
 	return nil
