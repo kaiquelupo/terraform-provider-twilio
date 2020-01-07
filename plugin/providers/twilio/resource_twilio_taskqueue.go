@@ -31,6 +31,10 @@ func resourceTwilioTaskQueue() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"target_workers": &schema.Schema{
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 		},
 	}
 }
@@ -39,6 +43,8 @@ func flattentaskQueueForCreate(d *schema.ResourceData) url.Values {
 	v := make(url.Values)
 
 	v.Add("FriendlyName", d.Get("friendly_name").(string))
+	v.Add("TargetWorkers", d.Get("target_workers").(string))
+	
 	return v
 }
 
