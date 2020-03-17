@@ -1,10 +1,9 @@
-module github.com/appian/terraform-provider-twilio
+module github.com/kaiquelupo/terraform-provider-twilio
 
 require (
 	github.com/agext/levenshtein v1.2.2
 	github.com/apparentlymart/go-cidr v1.0.1
 	github.com/apparentlymart/go-textseg v1.0.0
-	github.com/appian/twilio-go v0.0.0-20191021202026-dc5703031a9b
 	github.com/armon/go-radix v1.0.0
 	github.com/aws/aws-sdk-go v1.25.3
 	github.com/bgentry/go-netrc v0.0.0-20140422174119-9fd32a8b3d3d
@@ -31,6 +30,7 @@ require (
 	github.com/hashicorp/yamux v0.0.0-20181012175058-2f1d1f20f75d
 	github.com/inconshreveable/log15 v0.0.0-20180818164646-67afb5ed74ec
 	github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af
+	github.com/kaiquelupo/twilio-go v0.0.0-20200317165540-753b3354d163
 	github.com/kevinburke/go-types v0.0.0-20181103050146-31250f49d75a
 	github.com/kevinburke/go.uuid v1.2.0
 	github.com/kevinburke/rest v0.0.0-20180424040019-54a8b1109595

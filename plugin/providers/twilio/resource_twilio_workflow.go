@@ -35,6 +35,10 @@ func resourceTwilioWorkflow() *schema.Resource {
 				Type:     schema.TypeString,
 				Required: true,
 			},
+			"assignment_callback_url": &schema.Schema{
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 		},
 	}
 }
@@ -44,6 +48,8 @@ func flattenWorkflowForCreate(d *schema.ResourceData) url.Values {
 
 	v.Add("FriendlyName", d.Get("friendly_name").(string))
 	v.Add("Configuration", d.Get("configuration").(string))
+	v.Add("AssignmentCallbackUrl", d.Get("assignment_callback_url").(string))
+
 	return v
 }
 
